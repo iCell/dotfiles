@@ -1,0 +1,83 @@
+# ============================================================
+# Theme
+# ============================================================
+# Use Catppuccin Latte for light mode, Catppuccin Mocha for dark mode
+# Automatically switches based on system appearance
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+
+# ============================================================
+# Font
+# ============================================================
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+# macOS only: thicken font strokes for better clarity on Retina displays
+font-thicken = true
+# Increase line height by 20% for better readability
+adjust-cell-height = 20%
+
+# ============================================================
+# Cursor
+# ============================================================
+cursor-style = underline
+cursor-style-blink = true
+# Make the underline cursor thicker (default is 1px)
+adjust-cursor-thickness = 2
+
+# ============================================================
+# Window & Appearance
+# ============================================================
+# Semi-transparent background with blur effect
+background-opacity = 0.8
+background-blur = 20
+# Dim unfocused splits to clearly indicate focus
+unfocused-split-opacity = 0.4
+# Add padding around terminal content
+window-padding-x = 10
+window-padding-y = 10
+# Persist window state (tabs, splits, working directory) across restarts
+window-save-state = always
+
+# ============================================================
+# Shell Integration
+# ============================================================
+# Auto-detect shell type
+shell-integration = detect
+# Enable sudo wrapper, window title, SSH terminfo/env compatibility
+# Disable cursor override to respect our cursor-style setting
+shell-integration-features = no-cursor,sudo,title,ssh-terminfo,ssh-env
+
+# ============================================================
+# Quick Terminal
+# ============================================================
+# Show quick terminal on the screen where the mouse is
+quick-terminal-screen = mouse
+# Faster slide-in animation (default is 0.2s)
+quick-terminal-animation-duration = 0.15
+# Auto-hide when focus moves to another window
+quick-terminal-autohide = true
+
+# ============================================================
+# Clipboard & Security
+# ============================================================
+# Warn before pasting potentially dangerous text (e.g. with newlines)
+clipboard-paste-protection = true
+# Trust bracketed pastes as safe
+clipboard-paste-bracketed-safe = true
+
+# ============================================================
+# Notifications
+# ============================================================
+# Disable all desktop notifications from terminal programs
+desktop-notifications = false
+
+# ============================================================
+# macOS Specific
+# ============================================================
+# Treat left Option key as Alt for terminal keybindings
+macos-option-as-alt = left
+
+# ============================================================
+# Keybindings
+# ============================================================
+# Toggle quick terminal globally with Cmd+` (works even when Ghostty is not focused)
+keybind = global:cmd+grave_accent=toggle_quick_terminal
