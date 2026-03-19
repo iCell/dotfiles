@@ -16,13 +16,13 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
 One command to set up everything on a fresh Mac:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/dotfiles/main/setup.sh | zsh
+curl -fsSL https://raw.githubusercontent.com/iCell/dotfiles/main/setup.sh | zsh
 ```
 
 Or manually:
 
 ```sh
-git clone --recursive https://github.com/YOUR_USERNAME/dotfiles ~/dotfiles
+git clone --recursive https://github.com/iCell/dotfiles ~/dotfiles
 cd ~/dotfiles
 ./setup.sh
 ```

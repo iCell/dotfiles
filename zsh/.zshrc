@@ -1,7 +1,10 @@
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999999"
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source ~/.zsh/zsh-shift-select/zsh-shift-select.plugin.zsh
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 shift-select-line-left() {
   ((REGION_ACTIVE)) || zle set-mark-command
