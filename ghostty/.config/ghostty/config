@@ -27,7 +27,7 @@ adjust-cursor-thickness = 2
 # Window & Appearance
 # ============================================================
 # Semi-transparent background with blur effect
-background-opacity = 0.8
+background-opacity = 0.7
 background-blur = 20
 # Dim unfocused splits to clearly indicate focus
 unfocused-split-opacity = 0.4

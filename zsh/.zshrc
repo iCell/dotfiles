@@ -5,6 +5,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-shift-select/zsh-shift-select.plugin.zsh
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(starship init zsh)"
 
 shift-select-line-left() {
   ((REGION_ACTIVE)) || zle set-mark-command
