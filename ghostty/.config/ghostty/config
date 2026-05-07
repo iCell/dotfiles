@@ -3,7 +3,7 @@
 # ============================================================
 # Use Catppuccin Latte for light mode, Catppuccin Mocha for dark mode
 # Automatically switches based on system appearance
-theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+theme = dark:Catppuccin Mocha
 
 # ============================================================
 # Font
@@ -27,10 +27,10 @@ adjust-cursor-thickness = 2
 # Window & Appearance
 # ============================================================
 # Semi-transparent background with blur effect
-background-opacity = 0.7
+background-opacity = 0.8
 background-blur = 20
 # Dim unfocused splits to clearly indicate focus
-unfocused-split-opacity = 0.4
+# unfocused-split-opacity = 0.7
 # Add padding around terminal content
 window-padding-x = 10
 window-padding-y = 10

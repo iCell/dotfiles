@@ -1,6 +1,5 @@
 brew "starship"
 brew "stow"
-brew "zsh-autosuggestions"
-brew "zsh-syntax-highlighting"
+brew "antidote"
 cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"

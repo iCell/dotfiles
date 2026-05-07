@@ -1,0 +1,3 @@
+zsh-users/zsh-autosuggestions
+zdharma-continuum/fast-syntax-highlighting
+jirutka/zsh-shift-select

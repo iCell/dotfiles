@@ -5,10 +5,10 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
 ## What's Included
 
 - **Ghostty** — Terminal emulator config (Catppuccin theme, JetBrains Mono font, transparency, etc.)
-- **Zsh** — Shell config with plugins:
-  - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) (via Homebrew)
-  - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) (via Homebrew)
-  - [zsh-shift-select](https://github.com/jirutka/zsh-shift-select) (via Git submodule)
+- **Zsh** — Shell config with plugins managed by [antidote](https://github.com/mattmc3/antidote):
+  - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+  - [fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
+  - [zsh-shift-select](https://github.com/jirutka/zsh-shift-select)
   - Custom Shift+Cmd+Arrow key bindings for line selection
 
 ## Quick Setup
@@ -22,7 +22,7 @@ curl -fsSL https://raw.githubusercontent.com/iCell/dotfiles/main/setup.sh | zsh
 Or manually:
 
 ```sh
-git clone --recursive https://github.com/iCell/dotfiles ~/dotfiles
+git clone https://github.com/iCell/dotfiles ~/dotfiles
 cd ~/dotfiles
 ./setup.sh
 ```
@@ -40,8 +40,7 @@ cd ~/dotfiles
 │           └── config
 └── zsh/
     ├── .zshrc
-    └── .zsh/
-        └── zsh-shift-select/  (submodule)
+    └── .zsh_plugins.txt   # antidote plugin list
 ```
 
 ## Updating
@@ -59,4 +58,10 @@ After installing new Homebrew packages:
 
 ```sh
 brew bundle dump --file=~/dotfiles/Brewfile --force
+```
+
+To add a new zsh plugin, edit `zsh/.zsh_plugins.txt` and reload:
+
+```sh
+source ~/.zshrc
 ```
