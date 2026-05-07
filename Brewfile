@@ -1,5 +1,7 @@
 brew "starship"
 brew "stow"
 brew "antidote"
+brew "zoxide"
+brew "atuin"
 cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
