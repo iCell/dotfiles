@@ -17,6 +17,8 @@ eval "$(zoxide init zsh --cmd cd)"
 # atuin: enhanced shell history (takes over Ctrl+R and Up arrow)
 eval "$(atuin init zsh)"
 
+eval "$(mise activate zsh)"
+
 # Shift-select: extend selection to start/end of line
 shift-select-line-left() {
   ((REGION_ACTIVE)) || zle set-mark-command
