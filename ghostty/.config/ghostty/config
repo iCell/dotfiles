@@ -3,7 +3,7 @@
 # ============================================================
 # Use Catppuccin Latte for light mode, Catppuccin Mocha for dark mode
 # Automatically switches based on system appearance
-theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+theme = Catppuccin Mocha
 
 # ============================================================
 # Font
