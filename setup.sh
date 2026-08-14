@@ -55,6 +55,7 @@ brew bundle --file="$DOTFILES_DIR/Brewfile.$PROFILE"
 # 4. Stow configs
 cd "$DOTFILES_DIR"
 stow zsh
+stow herdr
 
 case "$PROFILE" in
   personal)

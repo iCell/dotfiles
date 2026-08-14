@@ -1,0 +1,6 @@
+# stow folds herdr/.config/herdr into ~/.config/herdr, so everything herdr
+# writes at runtime lands in this repo: *.log, *.sock, session.json, and
+# .plugins.lock (an empty process lock, not a dependency lockfile).
+# Whitelist only the hand-maintained config.
+herdr/.config/herdr/*
+!herdr/.config/herdr/config.toml

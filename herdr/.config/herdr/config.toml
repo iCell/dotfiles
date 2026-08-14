@@ -1,0 +1,5 @@
+# herdr config. Everything else in this directory (logs, sockets, session
+# state) is machine-local and ignored via the repo root .gitignore.
+#
+# Validate with:  herdr config check
+# Apply without restarting:  herdr server reload-config
