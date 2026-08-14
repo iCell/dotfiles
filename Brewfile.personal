@@ -1,2 +1,5 @@
-brew "orbstack"
+cask "orbstack"
 cask "ghostty"
+cask "zed"
+cask "claude-code"
+cask "codex"

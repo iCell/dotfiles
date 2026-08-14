@@ -17,7 +17,7 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
 Personal Mac:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/iCell/dotfiles/main/setup.sh | zsh -s -- personal
+curl -fsSL https://raw.githubusercontent.com/iCell/dotfiles/main/setup.sh | zsh
 ```
 
 Work Mac:
@@ -31,8 +31,8 @@ Or manually:
 ```sh
 git clone https://github.com/iCell/dotfiles ~/dotfiles
 cd ~/dotfiles
-./setup.sh personal
-# or
+./setup.sh       # defaults to personal
+# or, for a work Mac
 ./setup.sh work
 ```
 

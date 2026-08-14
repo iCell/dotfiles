@@ -3,7 +3,8 @@
 set -euo pipefail
 
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
-PROFILE="${1:-personal}"
+DEFAULT_PROFILE="personal"
+PROFILE="${1:-$DEFAULT_PROFILE}"
 SCRIPT_NAME="${0:t}"
 
 if [[ "$SCRIPT_NAME" == "zsh" || "$SCRIPT_NAME" == "-zsh" ]]; then
@@ -11,7 +12,7 @@ if [[ "$SCRIPT_NAME" == "zsh" || "$SCRIPT_NAME" == "-zsh" ]]; then
 fi
 
 usage() {
-  echo "Usage: $SCRIPT_NAME [personal|work]"
+  echo "Usage: $SCRIPT_NAME [personal|work] (default: $DEFAULT_PROFILE)"
 }
 
 case "$PROFILE" in
