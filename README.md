@@ -9,7 +9,7 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
   - [fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
   - [zsh-shift-select](https://github.com/jirutka/zsh-shift-select)
   - Custom Shift+Cmd+Arrow key bindings for line selection
-- **herdr** — Terminal workspace manager for AI coding agents. Only `config.toml` is synced; the logs, sockets and session state herdr writes alongside it are machine-local and gitignored.
+- **herdr** — Terminal workspace manager for AI coding agents. Only `config.toml` is synced; the logs, sockets and session state herdr writes alongside it stay machine-local (`setup.sh` stows with `--no-folding`, so `~/.config/herdr` is a real directory rather than a link into this repo).
 - **Ghostty** — Personal terminal emulator config (Catppuccin theme, JetBrains Mono font, transparency, etc.)
 - **iTerm2** — Work terminal profile support. iTerm2 itself is installed through company Self Service and is not managed by Homebrew.
 
@@ -46,7 +46,7 @@ cd ~/dotfiles
 ├── Brewfile.work     # Work Mac packages; does not install iTerm2
 ├── setup.sh          # Profile-aware setup script
 ├── README.md
-├── .gitignore        # keeps herdr's runtime files (logs, sockets, state) out of git
+├── .gitignore        # safety net for herdr runtime files (logs, sockets, state)
 ├── ghostty/
 │   └── .config/
 │       └── ghostty/

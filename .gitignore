@@ -1,6 +1,7 @@
-# stow folds herdr/.config/herdr into ~/.config/herdr, so everything herdr
-# writes at runtime lands in this repo: *.log, *.sock, session.json, and
-# .plugins.lock (an empty process lock, not a dependency lockfile).
+# setup.sh stows with --no-folding, so ~/.config/herdr is a real directory and
+# herdr's runtime files (*.log, *.sock, session.json, .plugins.lock) stay out of
+# this repo. Kept as a safety net for anyone who stows herdr by hand: without
+# --no-folding stow links the directory itself and those files land in here.
 # Whitelist only the hand-maintained config.
 herdr/.config/herdr/*
 !herdr/.config/herdr/config.toml

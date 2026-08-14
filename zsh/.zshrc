@@ -2,7 +2,7 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Load plugins via Antidote
-source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+source $HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh
 antidote load
 
 # zsh-autosuggestions highlight color
@@ -32,3 +32,6 @@ zle -N shift-select-line-left
 zle -N shift-select-line-right
 bindkey $'\e[1;10D' shift-select-line-left
 bindkey $'\e[1;10C' shift-select-line-right
+
+# rustup shims (rustc, cargo, ...)
+export PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
