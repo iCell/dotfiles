@@ -145,6 +145,27 @@ stow_pkg() {
   migrate_strays "$pkg"
 }
 
+# Machine-local shell config is deliberately not tracked here: whatever only
+# one Mac needs stays on that Mac. This only creates the file so it is
+# discoverable and ~/.zshrc has something to source; an existing one is left
+# untouched, which also makes re-running setup.sh safe.
+seed_local_zsh() {
+  local local_zsh="$STOW_TARGET/.config/zsh/local.zsh"
+  if [[ -e "$local_zsh" || -L "$local_zsh" ]]; then
+    return
+  fi
+  mkdir -p "${local_zsh:h}"
+  cat > "$local_zsh" <<'EOF'
+# Machine-local zsh config, sourced at the end of ~/.zshrc.
+#
+# Not tracked by the dotfiles repo and never pushed anywhere: put whatever only
+# this Mac needs here — work-only aliases and PATH entries, credentials,
+# internal hostnames. Anything that should apply to every machine belongs in
+# ~/dotfiles/zsh/.zshrc instead.
+EOF
+  echo "Created $local_zsh for machine-local shell config."
+}
+
 main() {
   PROFILE="${1:-$DEFAULT_PROFILE}"
   # An empty first argument (e.g. a blank $VAR) counts as not given, so it
@@ -224,6 +245,8 @@ main() {
 
   stow_pkg zsh
   stow_pkg herdr
+
+  seed_local_zsh
 
   case "$PROFILE" in
     personal)

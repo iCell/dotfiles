@@ -9,6 +9,7 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
   - [fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
   - [zsh-shift-select](https://github.com/jirutka/zsh-shift-select)
   - Custom Shift+Cmd+Arrow key bindings for line selection
+  - Per-machine additions in `~/.config/zsh/local.zsh` (see [Machine-local shell config](#machine-local-shell-config))
 - **herdr** — Terminal workspace manager for AI coding agents. Only `config.toml` is synced; the logs, sockets and session state herdr writes alongside it stay machine-local (`setup.sh` stows with `--no-folding`, so `~/.config/herdr` is a real directory rather than a link into this repo).
 - **Ghostty** — Personal terminal emulator config (Catppuccin theme, JetBrains Mono font, transparency, etc.)
 - **iTerm2** — Work terminal profile support. iTerm2 itself is installed through company Self Service and is not managed by Homebrew.
@@ -59,6 +60,40 @@ variable: on a Mac without Homebrew the installer inherits it and cannot prompt
 for your password, so unattended runs need sudo pre-authorized (`sudo -v`
 first) or Homebrew already installed.
 
+## Machine-local shell config
+
+There is one `zsh/.zshrc` here and it holds only what belongs on *every* machine.
+Anything a single Mac needs — work-only aliases and `PATH` entries, credentials,
+internal hostnames — goes in `~/.config/zsh/local.zsh`, which `~/.zshrc` sources
+last so it can override anything above it.
+
+That file is not in this repo and is never pushed anywhere, so work setup simply
+does not exist on the personal Mac (and this repo is public — company-internal
+details should not be committed to it in the first place). `setup.sh` creates an
+empty one on a fresh machine and leaves an existing one untouched.
+
+```sh
+$EDITOR ~/.config/zsh/local.zsh
+source ~/.zshrc                    # reload
+```
+
+A `PATH` entry only this machine needs goes in there as a `$path` prepend —
+`.zshrc` sets `typeset -U path`, so re-sourcing it will not stack duplicates:
+
+```zsh
+path=("$HOME/bin" /opt/company/toolchain/bin $path)   # first wins
+export SOME_TOKEN=...
+```
+
+`local.zsh` is loaded at the very end of `.zshrc`, so entries added here sit
+ahead of Homebrew, rustup and mise. Note this is `.zshrc`, i.e. interactive
+shells only — a `PATH` that GUI apps or `ssh host cmd` also need belongs in
+`~/.zshenv` instead.
+
+The trade-off is that local config is not backed up by this repo. If a work Mac
+accumulates enough of it to be worth versioning, keep it in a private repo and
+have `local.zsh` be a symlink into that checkout.
+
 ## Structure
 
 ```
@@ -78,8 +113,8 @@ first) or Homebrew already installed.
 │       └── herdr/
 │           └── config.toml
 ├── iterm2/           # Optional iTerm2 stow package for work machines
-└── zsh/
-    ├── .zshrc
+└── zsh/              # Shared shell config; per-machine bits live in
+    ├── .zshrc        # ~/.config/zsh/local.zsh, outside this repo
     └── .zsh_plugins.txt   # antidote plugin list
 ```
 
