@@ -15,6 +15,9 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
 
 ## Quick Setup
 
+> Requires an Apple Silicon Mac — Intel is not supported (Homebrew is assumed
+> at `/opt/homebrew` throughout; `setup.sh` refuses to run on Intel).
+
 Personal Mac:
 
 ```sh
@@ -50,6 +53,11 @@ Which profile? [p]ersonal / [w]ork / [q]uit:
 There is no default on an empty answer — it re-asks. If no terminal is available
 to answer on, the script aborts rather than guessing; set `NONINTERACTIVE=1` to
 accept the `personal` default instead.
+
+Note that `NONINTERACTIVE=1` is also the Homebrew installer's own control
+variable: on a Mac without Homebrew the installer inherits it and cannot prompt
+for your password, so unattended runs need sudo pre-authorized (`sudo -v`
+first) or Homebrew already installed.
 
 ## Structure
 

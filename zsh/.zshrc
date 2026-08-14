@@ -1,5 +1,10 @@
-# Homebrew environment
+# Homebrew environment (Apple Silicon only — Intel is not supported)
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Completions: pick up brew-installed functions, then initialize the system
+# (compinit must run before plugins that call compdef)
+fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
+autoload -Uz compinit && compinit
 
 # Load plugins via Antidote
 source $HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh
