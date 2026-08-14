@@ -18,7 +18,7 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
 Personal Mac:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/iCell/dotfiles/main/setup.sh | zsh
+curl -fsSL https://raw.githubusercontent.com/iCell/dotfiles/main/setup.sh | zsh -s -- personal
 ```
 
 Work Mac:
@@ -32,10 +32,24 @@ Or manually:
 ```sh
 git clone https://github.com/iCell/dotfiles ~/dotfiles
 cd ~/dotfiles
-./setup.sh       # defaults to personal
+./setup.sh personal
 # or, for a work Mac
 ./setup.sh work
 ```
+
+### Profile confirmation
+
+Run without an argument and `setup.sh` asks which profile to install before it
+touches anything, so forgetting `work` on a work Mac cannot quietly install the
+personal profile:
+
+```
+Which profile? [p]ersonal / [w]ork / [q]uit:
+```
+
+There is no default on an empty answer — it re-asks. If no terminal is available
+to answer on, the script aborts rather than guessing; set `NONINTERACTIVE=1` to
+accept the `personal` default instead.
 
 ## Structure
 

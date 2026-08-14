@@ -6,6 +6,7 @@ DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
 STOW_TARGET="${DOTFILES_DIR:h}"
 DEFAULT_PROFILE="personal"
 PROFILE="${1:-$DEFAULT_PROFILE}"
+PROFILE_GIVEN=$(( $# > 0 ))
 SCRIPT_NAME="${0:t}"
 
 if [[ "$SCRIPT_NAME" == "zsh" || "$SCRIPT_NAME" == "-zsh" ]]; then
@@ -14,6 +15,13 @@ fi
 
 usage() {
   echo "Usage: $SCRIPT_NAME [personal|work] (default: $DEFAULT_PROFILE)"
+}
+
+# `[[ -r /dev/tty ]]` only checks the file mode, so it succeeds even when the
+# process has no controlling terminal and opening /dev/tty would fail. Probe it
+# for real, in a subshell so the failed redirection cannot kill this script.
+have_tty() {
+  ( : < /dev/tty ) 2>/dev/null
 }
 
 case "$PROFILE" in
@@ -27,6 +35,54 @@ case "$PROFILE" in
     exit 1
     ;;
 esac
+
+# 0. Confirm the profile when it was not given on the command line, so that
+# forgetting the argument on a work Mac does not silently install the personal
+# profile. Nothing has been installed at this point.
+confirm_profile() {
+  local reply prompt_in=""
+
+  # Piped into zsh (the README one-liner): stdin is the script itself, so the
+  # answer has to come from the controlling terminal.
+  if have_tty; then
+    prompt_in=/dev/tty
+  elif [[ -t 0 ]]; then
+    prompt_in=/dev/stdin
+  else
+    echo "No profile given and no terminal available to confirm one." >&2
+    echo "Re-run as '$SCRIPT_NAME personal' or '$SCRIPT_NAME work'," >&2
+    echo "or set NONINTERACTIVE=1 to accept the '$DEFAULT_PROFILE' default." >&2
+    exit 1
+  fi
+
+  echo "No profile given. Pick one:"
+  echo "  personal  Brewfile.common + Brewfile.personal, ghostty config"
+  echo "  work      Brewfile.common + Brewfile.work, iterm2 config"
+  echo
+
+  while true; do
+    printf "Which profile? [p]ersonal / [w]ork / [q]uit: "
+    if ! read -r reply < "$prompt_in"; then
+      echo >&2
+      echo "No answer; aborting without installing anything." >&2
+      exit 1
+    fi
+    case "${reply:l}" in
+      p|personal) PROFILE="personal"; break ;;
+      w|work)     PROFILE="work"; break ;;
+      q|quit)     echo "Aborted."; exit 0 ;;
+      # No default on an empty answer: the whole point is a deliberate choice.
+      *)          echo "Please answer p, w, or q." ;;
+    esac
+  done
+  echo
+}
+
+if (( ! PROFILE_GIVEN )) && [[ -z "${NONINTERACTIVE-}" ]]; then
+  confirm_profile
+fi
+
+echo "Setting up the $PROFILE profile."
 
 # 1. Install Homebrew if not installed
 load_brew_shellenv() {
@@ -49,7 +105,7 @@ if ! load_brew_shellenv; then
   # password. Hand it the controlling terminal so it stays interactive.
   if [[ -t 0 ]]; then
     /bin/bash -c "$brew_installer"
-  elif [[ -r /dev/tty ]]; then
+  elif have_tty; then
     /bin/bash -c "$brew_installer" < /dev/tty
   else
     echo "No terminal available to install Homebrew." >&2
