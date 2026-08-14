@@ -1,3 +1,4 @@
+brew "rustup"
 cask "orbstack"
 cask "ghostty"
 cask "zed"
