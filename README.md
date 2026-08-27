@@ -12,6 +12,8 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
   - Per-machine additions in `~/.config/zsh/local.zsh` (see [Machine-local shell config](#machine-local-shell-config))
 - **herdr** — Terminal workspace manager for AI coding agents. Only `config.toml` is synced; the logs, sockets and session state herdr writes alongside it stay machine-local (`setup.sh` stows with `--no-folding`, so `~/.config/herdr` is a real directory rather than a link into this repo).
 - **Ghostty** — Personal terminal emulator config (Catppuccin theme, JetBrains Mono font, transparency, etc.)
+- **Codex** — Personal command-approval rules. Homebrew metadata updates are allowed without repeated prompts; Codex's machine-local `default.rules` remains unmanaged.
+- **Claude Code** — Personal user settings and command permissions. Homebrew metadata updates are allowed without repeated prompts across projects.
 - **iTerm2** — Work terminal profile support. iTerm2 itself is installed through company Self Service and is not managed by Homebrew.
 
 ## Quick Setup
@@ -104,6 +106,13 @@ have `local.zsh` be a symlink into that checkout.
 ├── setup.sh          # Profile-aware setup script
 ├── README.md
 ├── .gitignore        # safety net for herdr runtime files (logs, sockets, state)
+├── claude/
+│   └── .claude/
+│       └── settings.json
+├── codex/
+│   └── .codex/
+│       └── rules/
+│           └── homebrew.rules
 ├── ghostty/
 │   └── .config/
 │       └── ghostty/

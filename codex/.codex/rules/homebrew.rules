@@ -1,0 +1,5 @@
+prefix_rule(
+    pattern = [["brew", "/opt/homebrew/bin/brew"], "update"],
+    decision = "allow",
+    justification = "Allow Homebrew metadata updates",
+)

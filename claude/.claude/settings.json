@@ -1,0 +1,29 @@
+{
+  "model": "claude-fable-5[1m]",
+  "permissions": {
+    "allow": [
+      "Bash(brew update *)",
+      "Bash(/opt/homebrew/bin/brew update *)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/lixiaoyu/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
+  "theme": "dark"
+}
