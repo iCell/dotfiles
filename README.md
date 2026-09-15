@@ -11,6 +11,7 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
   - Custom Shift+Cmd+Arrow key bindings for line selection
   - Per-machine additions in `~/.config/zsh/local.zsh` (see [Machine-local shell config](#machine-local-shell-config))
 - **herdr** — Terminal workspace manager for AI coding agents. Only `config.toml` is synced; the logs, sockets and session state herdr writes alongside it stay machine-local (`setup.sh` stows with `--no-folding`, so `~/.config/herdr` is a real directory rather than a link into this repo).
+- **Otty** — Terminal emulator config, shared by both profiles. Not stowed: Otty saves `config.toml` by replacing the file, which would turn a per-file symlink back into a plain copy, so `setup.sh` links the whole `~/.config/otty` directory to `~/dotfiles/otty` instead. Only `config.toml` is tracked; the themes, fonts and recipes Otty seeds there are gitignored.
 - **Ghostty** — Personal terminal emulator config (Catppuccin theme, JetBrains Mono font, transparency, etc.)
 - **Codex** — Personal command-approval rules. Homebrew metadata updates are allowed without repeated prompts; Codex's machine-local `default.rules` remains unmanaged.
 - **Claude Code** — Personal user settings and command permissions. Homebrew metadata updates are allowed without repeated prompts across projects.

@@ -11,3 +11,10 @@
 # Whitelist only the hand-maintained config.
 herdr/.config/herdr/*
 !herdr/.config/herdr/config.toml
+
+# otty is not stowed: setup.sh links the whole ~/.config/otty directory to
+# otty/, because Otty saves config.toml by replacing the file, which would
+# break a per-file symlink. Otty seeds themes/, fonts/ and recipes/ into that
+# directory on first launch; those are app defaults, not hand-maintained config.
+otty/*
+!otty/config.toml
