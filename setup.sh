@@ -55,7 +55,7 @@ confirm_profile() {
 
   {
     echo "No profile given. Pick one:"
-    echo "  personal  Brewfile.common + Brewfile.personal, ghostty/Codex/Claude configs"
+    echo "  personal  Brewfile.common + Brewfile.personal, ghostty/Claude configs"
     echo "  work      Brewfile.common + Brewfile.work, iterm2 config"
     echo
   } > "$prompt_out"
@@ -294,7 +294,6 @@ main() {
   case "$PROFILE" in
     personal)
       stow_pkg ghostty
-      stow_pkg codex
       stow_pkg claude
       ;;
     work)
