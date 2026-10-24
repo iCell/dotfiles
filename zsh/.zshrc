@@ -29,11 +29,6 @@ eval "$(atuin init zsh)"
 
 eval "$(mise activate zsh)"
 
-# direnv: per-directory environments from .envrc. Note that its hook prepends
-# itself to precmd_functions/chpwd_functions, so it always runs before mise's
-# regardless of where this line sits.
-eval "$(direnv hook zsh)"
-
 # Shift-select: extend selection to start/end of line
 shift-select-line-left() {
   ((REGION_ACTIVE)) || zle set-mark-command
