@@ -55,7 +55,7 @@ confirm_profile() {
 
   {
     echo "No profile given. Pick one:"
-    echo "  personal  Brewfile.common + Brewfile.personal, ghostty/Claude configs"
+    echo "  personal  Brewfile.common + Brewfile.personal, Claude config"
     echo "  work      Brewfile.common + Brewfile.work, iterm2 config"
     echo
   } > "$prompt_out"
@@ -166,48 +166,6 @@ EOF
   echo "Created $local_zsh for machine-local shell config."
 }
 
-# Otty saves config.toml by writing a temp file and renaming it over the
-# original, which replaces a per-file symlink with a plain copy and silently
-# detaches the config from this repo. So link the whole ~/.config/otty
-# directory instead: the rename then happens inside the repo. This is also
-# why otty is not a stow package — stow_pkg never folds directories, and its
-# stray migration would move the themes/fonts/recipes Otty seeds here (which
-# .gitignore excludes) straight back out.
-link_otty() {
-  local link="$STOW_TARGET/.config/otty"
-  local repo_dir="$DOTFILES_DIR/otty"
-  local rel="../${DOTFILES_DIR:t}/otty"
-  local entry backup="$link$BACKUP_SUFFIX"
-
-  if [[ -L "$link" && "$(readlink -- "$link")" == "$rel" ]]; then
-    return
-  fi
-
-  if [[ -d "$link" && ! -L "$link" ]]; then
-    # Otty has already run here. Carry over what it seeded (and any themes or
-    # fonts added since) so nothing is lost or re-seeded; the repo's
-    # config.toml wins, and a local one that differs is kept in the backup.
-    for entry in "$link"/*(DN); do
-      [[ "${entry:t}" == config.toml || -e "$repo_dir/${entry:t}" ]] && continue
-      mv "$entry" "$repo_dir/"
-    done
-    if [[ -f "$link/config.toml" ]] && cmp -s "$link/config.toml" "$repo_dir/config.toml"; then
-      rm "$link/config.toml"
-    fi
-    if ! rmdir "$link" 2>/dev/null; then
-      echo "Backing up $link -> $backup (local Otty files not carried into the repo)"
-      mv "$link" "$backup"
-    fi
-  elif [[ -e "$link" || -L "$link" ]]; then
-    echo "Backing up $link -> $backup"
-    mv "$link" "$backup"
-  fi
-
-  mkdir -p "${link:h}"
-  ln -s "$rel" "$link"
-  echo "Linked $link -> $rel"
-}
-
 main() {
   PROFILE="${1:-$DEFAULT_PROFILE}"
   # An empty first argument (e.g. a blank $VAR) counts as not given, so it
@@ -287,13 +245,12 @@ main() {
 
   stow_pkg zsh
   stow_pkg herdr
-  link_otty
+  stow_pkg ghostty
 
   seed_local_zsh
 
   case "$PROFILE" in
     personal)
-      stow_pkg ghostty
       stow_pkg claude
       ;;
     work)
