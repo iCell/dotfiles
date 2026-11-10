@@ -2,3 +2,4 @@
 # iTerm2 is installed through company Self Service, so it is intentionally
 # not managed by this Brewfile.
 brew "herdr"
+cask "ghostty"

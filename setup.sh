@@ -108,7 +108,7 @@ migrate_strays() {
 }
 
 # stow aborts an entire package on its first conflict, so a Mac that already
-# has a real ~/.zshrc (or ~/.config/ghostty/config) would stop the script
+# has a real ~/.zshrc would stop the script
 # here. Move anything that is in the way — and not already the exact link stow
 # would make — aside first.
 stow_pkg() {
@@ -244,7 +244,6 @@ main() {
   BACKUP_SUFFIX=".pre-stow-$(date +%Y%m%d%H%M%S)"
 
   stow_pkg zsh
-  stow_pkg ghostty
 
   seed_local_zsh
 
@@ -253,6 +252,7 @@ main() {
       stow_pkg claude
       ;;
     work)
+      stow_pkg ghostty
       # TUI config only: the Herdr desktop app on the personal profile keeps
       # its own settings in ~/.config/herdr-app and never reads this file.
       stow_pkg herdr
