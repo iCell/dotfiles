@@ -55,8 +55,8 @@ confirm_profile() {
 
   {
     echo "No profile given. Pick one:"
-    echo "  personal  Brewfile.common + Brewfile.personal, Claude config"
-    echo "  work      Brewfile.common + Brewfile.work, iterm2 config"
+    echo "  personal  Brewfile.common + Brewfile.personal (Herdr app), Claude config"
+    echo "  work      Brewfile.common + Brewfile.work (herdr TUI), herdr + iterm2 config"
     echo
   } > "$prompt_out"
 
@@ -244,7 +244,6 @@ main() {
   BACKUP_SUFFIX=".pre-stow-$(date +%Y%m%d%H%M%S)"
 
   stow_pkg zsh
-  stow_pkg herdr
   stow_pkg ghostty
 
   seed_local_zsh
@@ -254,6 +253,9 @@ main() {
       stow_pkg claude
       ;;
     work)
+      # TUI config only: the Herdr desktop app on the personal profile keeps
+      # its own settings in ~/.config/herdr-app and never reads this file.
+      stow_pkg herdr
       if [[ -d "$DOTFILES_DIR/iterm2" ]]; then
         stow_pkg iterm2
       fi

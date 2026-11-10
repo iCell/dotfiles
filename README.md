@@ -10,7 +10,7 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
   - [zsh-shift-select](https://github.com/jirutka/zsh-shift-select)
   - Custom Shift+Cmd+Arrow key bindings for line selection
   - Per-machine additions in `~/.config/zsh/local.zsh` (see [Machine-local shell config](#machine-local-shell-config))
-- **herdr** — Terminal workspace manager for AI coding agents. Only `config.toml` is synced; the logs, sockets and session state herdr writes alongside it stay machine-local (`setup.sh` stows with `--no-folding`, so `~/.config/herdr` is a real directory rather than a link into this repo).
+- **herdr** — Terminal workspace manager for AI coding agents. The personal profile installs the desktop app (`herdr-app` cask); the work profile installs the terminal TUI (`herdr` formula). The config here is the TUI's, so it is stowed on the work profile only — the app keeps its own settings in `~/.config/herdr-app`, which is not tracked. Only `config.toml` is synced; the logs, sockets and session state herdr writes alongside it stay machine-local (`setup.sh` stows with `--no-folding`, so `~/.config/herdr` is a real directory rather than a link into this repo).
 - **Ghostty** — Terminal emulator config, shared by both profiles (Catppuccin theme, JetBrains Mono font, transparency, etc.)
 - **Claude Code** — Personal user settings and command permissions. Homebrew metadata updates are allowed without repeated prompts across projects.
 - **iTerm2** — Work terminal profile support. iTerm2 itself is installed through company Self Service and is not managed by Homebrew.
