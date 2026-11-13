@@ -11,3 +11,8 @@
 herdr-app/.config/herdr-app/*
 !herdr-app/.config/herdr-app/settings.json
 !herdr-app/.config/herdr-app/keys.json
+
+# Machine-local shell config lives in ~/.config/zsh/local.zsh and is never
+# tracked (see "Machine-local shell config" in the README). This keeps it out
+# even if it ends up inside the zsh package.
+zsh/.config/zsh/local.zsh
