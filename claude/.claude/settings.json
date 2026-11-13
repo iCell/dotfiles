@@ -1,15 +1,24 @@
 {
-  "model": "claude-fable-5[1m]",
   "permissions": {
     "allow": [
       "Bash(brew update *)",
       "Bash(/opt/homebrew/bin/brew update *)"
     ]
   },
+  "model": "fable",
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true
   },
   "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-fable-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5-2": {
+      "effortLevel": "medium"
+    }
+  },
   "tui": "fullscreen",
-  "theme": "dark"
+  "theme": "dark",
+  "agentPushNotifEnabled": true
 }

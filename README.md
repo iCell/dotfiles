@@ -11,7 +11,7 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
   - Custom Shift+Cmd+Arrow key bindings for line selection
   - Per-machine additions in `~/.config/zsh/local.zsh` (see [Machine-local shell config](#machine-local-shell-config))
 - **Herdr** — Terminal workspace manager for AI coding agents. Both profiles install the desktop app (`herdr-app` cask, in `Brewfile.common`). Only `settings.json` (zoom, sounds, fonts, theme) and `keys.json` (keybindings) are synced; the app writes through the symlinks, so a change made in the app shows up here as a diff to commit. Everything else in `~/.config/herdr-app` is rewritten by the app on start or is per-machine state (window position, open spaces, sockets) and stays local. Custom layouts, themes or mods can be added to the package later.
-- **Claude Code** — Personal user settings and command permissions. Homebrew metadata updates are allowed without repeated prompts across projects.
+- **Claude Code** — User settings and command permissions, stowed on both profiles. Claude Code writes to this file itself (model, effort, `/config` toggles), so those changes show up here as diffs to commit. Homebrew metadata updates are allowed without repeated prompts across projects.
 - **iTerm2** — Work terminal profile support. iTerm2 itself is installed through company Self Service and is not managed by Homebrew.
 
 ## Quick Setup

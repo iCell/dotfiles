@@ -56,7 +56,7 @@ confirm_profile() {
   {
     echo "No profile given. Pick one:"
     echo "  personal  Brewfile.common + Brewfile.personal, zsh + herdr-app + Claude config"
-    echo "  work      Brewfile.common + Brewfile.work, zsh + herdr-app + iterm2 config"
+    echo "  work      Brewfile.common + Brewfile.work, zsh + herdr-app + Claude + iterm2 config"
     echo
   } > "$prompt_out"
 
@@ -247,19 +247,13 @@ main() {
   # Only the two files the person owns (settings.json, keys.json). The rest of
   # ~/.config/herdr-app is rewritten by the app or is per-machine state.
   stow_pkg herdr-app
+  stow_pkg claude
 
   seed_local_zsh
 
-  case "$PROFILE" in
-    personal)
-      stow_pkg claude
-      ;;
-    work)
-      if [[ -d "$DOTFILES_DIR/iterm2" ]]; then
-        stow_pkg iterm2
-      fi
-      ;;
-  esac
+  if [[ "$PROFILE" == work && -d "$DOTFILES_DIR/iterm2" ]]; then
+    stow_pkg iterm2
+  fi
 
   echo "Done! Restart your terminal to apply the $PROFILE profile."
 }
