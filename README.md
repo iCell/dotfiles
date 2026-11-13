@@ -10,7 +10,7 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
   - [zsh-shift-select](https://github.com/jirutka/zsh-shift-select)
   - Custom Shift+Cmd+Arrow key bindings for line selection
   - Per-machine additions in `~/.config/zsh/local.zsh` (see [Machine-local shell config](#machine-local-shell-config))
-- **herdr** — Terminal workspace manager for AI coding agents. The personal profile installs the desktop app (`herdr-app` cask); the work profile installs the terminal TUI (`herdr` formula). The config here is the TUI's, so it is stowed on the work profile only — the app keeps its own settings in `~/.config/herdr-app`, which is not tracked. Only `config.toml` is synced; the logs, sockets and session state herdr writes alongside it stay machine-local (`setup.sh` stows with `--no-folding`, so `~/.config/herdr` is a real directory rather than a link into this repo).
+- **Herdr** — Terminal workspace manager for AI coding agents. Both profiles install the desktop app (`herdr-app` cask, in `Brewfile.common`). It keeps its own settings in `~/.config/herdr-app`, which is not tracked here.
 - **Ghostty** — Terminal emulator config, work profile only (Catppuccin theme, JetBrains Mono font, transparency, etc.)
 - **Claude Code** — Personal user settings and command permissions. Homebrew metadata updates are allowed without repeated prompts across projects.
 - **iTerm2** — Work terminal profile support. iTerm2 itself is installed through company Self Service and is not managed by Homebrew.
@@ -104,7 +104,7 @@ have `local.zsh` be a symlink into that checkout.
 ├── Brewfile.work     # Work Mac packages; does not install iTerm2
 ├── setup.sh          # Profile-aware setup script
 ├── README.md
-├── .gitignore        # safety net for herdr runtime files (logs, sockets, state)
+├── .gitignore
 ├── claude/
 │   └── .claude/
 │       └── settings.json
@@ -112,10 +112,6 @@ have `local.zsh` be a symlink into that checkout.
 │   └── .config/
 │       └── ghostty/
 │           └── config
-├── herdr/
-│   └── .config/
-│       └── herdr/
-│           └── config.toml
 ├── iterm2/           # Optional iTerm2 stow package for work machines
 └── zsh/              # Shared shell config; per-machine bits live in
     ├── .zshrc        # ~/.config/zsh/local.zsh, outside this repo

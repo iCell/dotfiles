@@ -55,8 +55,8 @@ confirm_profile() {
 
   {
     echo "No profile given. Pick one:"
-    echo "  personal  Brewfile.common + Brewfile.personal (Herdr app), Claude config"
-    echo "  work      Brewfile.common + Brewfile.work (herdr TUI), herdr + iterm2 config"
+    echo "  personal  Brewfile.common + Brewfile.personal, Claude config"
+    echo "  work      Brewfile.common + Brewfile.work, ghostty + iterm2 config"
     echo
   } > "$prompt_out"
 
@@ -84,7 +84,7 @@ load_brew_shellenv() {
 }
 
 # Machines provisioned before --no-folding got whole directories folded into
-# the repo, so files their programs wrote at runtime (herdr session state,
+# the repo, so files their programs wrote at runtime (session state,
 # logs) physically live inside the package. After unfolding, move every
 # gitignored stray out to its real target path so the repo only holds tracked
 # config. Finder/editor debris is skipped, not migrated.
@@ -253,9 +253,6 @@ main() {
       ;;
     work)
       stow_pkg ghostty
-      # TUI config only: the Herdr desktop app on the personal profile keeps
-      # its own settings in ~/.config/herdr-app and never reads this file.
-      stow_pkg herdr
       if [[ -d "$DOTFILES_DIR/iterm2" ]]; then
         stow_pkg iterm2
       fi
