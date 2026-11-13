@@ -11,7 +11,6 @@ My personal dotfiles for macOS, managed with [GNU Stow](https://www.gnu.org/soft
   - Custom Shift+Cmd+Arrow key bindings for line selection
   - Per-machine additions in `~/.config/zsh/local.zsh` (see [Machine-local shell config](#machine-local-shell-config))
 - **Herdr** — Terminal workspace manager for AI coding agents. Both profiles install the desktop app (`herdr-app` cask, in `Brewfile.common`). It keeps its own settings in `~/.config/herdr-app`, which is not tracked here.
-- **Ghostty** — Terminal emulator config, work profile only (Catppuccin theme, JetBrains Mono font, transparency, etc.)
 - **Claude Code** — Personal user settings and command permissions. Homebrew metadata updates are allowed without repeated prompts across projects.
 - **iTerm2** — Work terminal profile support. iTerm2 itself is installed through company Self Service and is not managed by Homebrew.
 
@@ -108,10 +107,6 @@ have `local.zsh` be a symlink into that checkout.
 ├── claude/
 │   └── .claude/
 │       └── settings.json
-├── ghostty/
-│   └── .config/
-│       └── ghostty/
-│           └── config
 ├── iterm2/           # Optional iTerm2 stow package for work machines
 └── zsh/              # Shared shell config; per-machine bits live in
     ├── .zshrc        # ~/.config/zsh/local.zsh, outside this repo

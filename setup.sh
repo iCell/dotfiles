@@ -56,7 +56,7 @@ confirm_profile() {
   {
     echo "No profile given. Pick one:"
     echo "  personal  Brewfile.common + Brewfile.personal, Claude config"
-    echo "  work      Brewfile.common + Brewfile.work, ghostty + iterm2 config"
+    echo "  work      Brewfile.common + Brewfile.work, iterm2 config"
     echo
   } > "$prompt_out"
 
@@ -252,7 +252,6 @@ main() {
       stow_pkg claude
       ;;
     work)
-      stow_pkg ghostty
       if [[ -d "$DOTFILES_DIR/iterm2" ]]; then
         stow_pkg iterm2
       fi
