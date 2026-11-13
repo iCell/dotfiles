@@ -55,8 +55,8 @@ confirm_profile() {
 
   {
     echo "No profile given. Pick one:"
-    echo "  personal  Brewfile.common + Brewfile.personal, Claude config"
-    echo "  work      Brewfile.common + Brewfile.work, iterm2 config"
+    echo "  personal  Brewfile.common + Brewfile.personal, zsh + herdr-app + Claude config"
+    echo "  work      Brewfile.common + Brewfile.work, zsh + herdr-app + iterm2 config"
     echo
   } > "$prompt_out"
 
@@ -244,6 +244,9 @@ main() {
   BACKUP_SUFFIX=".pre-stow-$(date +%Y%m%d%H%M%S)"
 
   stow_pkg zsh
+  # Only the two files the person owns (settings.json, keys.json). The rest of
+  # ~/.config/herdr-app is rewritten by the app or is per-machine state.
+  stow_pkg herdr-app
 
   seed_local_zsh
 

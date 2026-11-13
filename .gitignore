@@ -3,3 +3,11 @@
 # setup.sh's conflict pre-clearing assumes both are absent.
 .DS_Store
 *~
+
+# Only the hand-owned Herdr app config is tracked. setup.sh stows with
+# --no-folding, so the app's runtime files never land here; this is a safety
+# net for anyone who stows herdr-app by hand. Un-ignore custom layouts, themes
+# or mods here when adding them.
+herdr-app/.config/herdr-app/*
+!herdr-app/.config/herdr-app/settings.json
+!herdr-app/.config/herdr-app/keys.json
