@@ -3,6 +3,7 @@
 # setup.sh's conflict pre-clearing assumes both are absent.
 .DS_Store
 *~
+*.bak
 
 # Only the hand-owned Herdr app config is tracked. setup.sh stows with
 # --no-folding, so the app's runtime files never land here; this is a safety
