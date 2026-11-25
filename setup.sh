@@ -56,7 +56,7 @@ confirm_profile() {
   {
     echo "No profile given. Pick one:"
     echo "  personal  Brewfile.common + Brewfile.personal, zsh + herdr-app + Claude config"
-    echo "  work      Brewfile.common + Brewfile.work, zsh + herdr-app + Claude + iterm2 config"
+    echo "  work      Brewfile.common + Brewfile.work, zsh + herdr-app + iterm2 config"
     echo
   } > "$prompt_out"
 
@@ -166,6 +166,19 @@ EOF
   echo "Created $local_zsh for machine-local shell config."
 }
 
+# Work Macs keep their Claude Code settings local. A work Mac that was set up
+# while the claude package was stowed on both profiles still has
+# ~/.claude/settings.json linked into this repo, so its changes would land in
+# the personal settings. Replace that link with a real copy of the file so the
+# Mac keeps its current settings but stops writing into the repo.
+detach_claude_settings() {
+  local target="$STOW_TARGET/.claude/settings.json"
+  [[ -L "$target" && "${target:A}" == "${DOTFILES_DIR:A}/claude/.claude/settings.json" ]] || return 0
+  cp "${target:A}" "$target.tmp"
+  mv "$target.tmp" "$target"
+  echo "Replaced the $target link with a local copy; work Claude settings are not synced."
+}
+
 main() {
   PROFILE="${1:-$DEFAULT_PROFILE}"
   # An empty first argument (e.g. a blank $VAR) counts as not given, so it
@@ -247,13 +260,22 @@ main() {
   # Only the two files the person owns (settings.json, keys.json). The rest of
   # ~/.config/herdr-app is rewritten by the app or is per-machine state.
   stow_pkg herdr-app
-  stow_pkg claude
 
   seed_local_zsh
 
-  if [[ "$PROFILE" == work && -d "$DOTFILES_DIR/iterm2" ]]; then
-    stow_pkg iterm2
-  fi
+  case "$PROFILE" in
+    personal)
+      # Claude Code writes through this link (model, effort, /config), so
+      # personal changes land here as diffs to commit.
+      stow_pkg claude
+      ;;
+    work)
+      detach_claude_settings
+      if [[ -d "$DOTFILES_DIR/iterm2" ]]; then
+        stow_pkg iterm2
+      fi
+      ;;
+  esac
 
   echo "Done! Restart your terminal to apply the $PROFILE profile."
 }
